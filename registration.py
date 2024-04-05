@@ -60,10 +60,8 @@ class RegistrationForm:
         username = self.username_entry.get()
         email = self.email_entry.get()
         password = self.password_entry.get()
-        print(f"Username: {username}, Email: {email}, Password: {password}")
         # Connect to the database
         conn = sqlite3.connect('db.sqlite3')
-        print("Connected to database")
         cursor = conn.cursor()
         # Create table 'applicants' if it doesn't exist
         cursor.execute(
@@ -82,11 +80,9 @@ class RegistrationForm:
                 (username, email, password)
             )
             conn.commit()  # Save changes to the database
-            print(
-                f"Registered username: {username}, email: {email}, password: {password}"
-            )
             self.message_label.config(text="Registration successful!")
             self.success = True
+            self.root.destroy()
         except sqlite3.Error as err:
             # Handle database errors (e.g., duplicate username or email)
             self.message_label.config(text="Error: " + str(err))

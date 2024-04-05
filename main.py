@@ -54,6 +54,7 @@ class ApplicantApp(tk.Tk):
 
         # Display the report (different methods based on your choice)
         self.display_report(report_content)
+        self.message_label.config(text="Report Generated!")
 
         # Close the connection
         conn.close()
@@ -94,6 +95,7 @@ class ApplicantApp(tk.Tk):
         login_window = tk.Toplevel(self)  # Use self for parent window
         login_window.title("Login")
         login_form = LoginForm(login_window)
+        login_window.wait_window()
         if login_form.success:
             self.message_label.config(text="Login successful!")
         return login_form
@@ -106,6 +108,7 @@ class ApplicantApp(tk.Tk):
         register_window = tk.Toplevel(self)  # Use self for parent window
         register_window.title("Registration")
         registration_form = RegistrationForm(register_window)
+        register_window.wait_window()
         if registration_form.success:
             self.message_label.config(text="Registration successful!")
         return registration_form
