@@ -12,6 +12,7 @@ class ApplicantApp(tk.Tk):
     Class: ApplicantApp
     Function: Main application class for login and registration functionalities
     """
+    success = False
     def __init__(self):
         """
         Initialize the main window and buttons for login and registration.
@@ -41,6 +42,10 @@ class ApplicantApp(tk.Tk):
         method: generate_report
         function: Generate a report based on the data in the database
         '''
+        if not self.success:
+            self.message_label.config(text="Please login or register first!")
+            return
+
         # Connect to the database (if needed)
         conn = sqlite3.connect('db.sqlite3')
         cursor = conn.cursor()
@@ -97,6 +102,7 @@ class ApplicantApp(tk.Tk):
         login_form = LoginForm(login_window)
         login_window.wait_window()
         if login_form.success:
+            self.success = True
             self.message_label.config(text="Login successful!")
         return login_form
 
@@ -110,6 +116,7 @@ class ApplicantApp(tk.Tk):
         registration_form = RegistrationForm(register_window)
         register_window.wait_window()
         if registration_form.success:
+            self.success = True
             self.message_label.config(text="Registration successful!")
         return registration_form
 
