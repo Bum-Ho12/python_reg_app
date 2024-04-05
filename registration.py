@@ -17,35 +17,33 @@ class RegistrationForm:
         Initialize the registration form elements within the provided root window.
         """
         self.root = root
-        # Create the main window
-        # self.root = tk.Tk()
         self.root.title("Registration Form")
-        self.root.geometry("400x200")
+        self.root.geometry("400x300")
 
         # Username label and entry field
         self.username_label = tk.Label(root, text="Username:")
-        self.username_label.pack()
+        self.username_label.pack(pady=2)
 
         self.username_entry = tk.Entry(root)
-        self.username_entry.pack()
+        self.username_entry.pack(pady=5)
 
         # Email label and entry field
         self.email_label = tk.Label(root, text="Email:")
-        self.email_label.pack()
+        self.email_label.pack(pady=2)
 
         self.email_entry = tk.Entry(root)
-        self.email_entry.pack()
+        self.email_entry.pack(pady=5)
 
         # Password label and entry field
         self.password_label = tk.Label(root, text="Password:")
-        self.password_label.pack()
+        self.password_label.pack(pady=2)
 
         self.password_entry = tk.Entry(root, show="*")  # Use asterisk for hidden password
-        self.password_entry.pack()
+        self.password_entry.pack(pady=5)
 
         # Register button
         self.register_button = tk.Button(root, text="Register", command=self.register)
-        self.register_button.pack()
+        self.register_button.pack(pady=10)
 
         # Message label (optional)
         self.message_label = tk.Label(root, text="")

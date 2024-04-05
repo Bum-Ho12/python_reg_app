@@ -22,21 +22,21 @@ class LoginForm:
 
         # Email label and entry field
         self.email_label = tk.Label(root, text="Email:")
-        self.email_label.pack()
+        self.email_label.pack(pady=2)
 
         self.email_entry = tk.Entry(root)
-        self.email_entry.pack()
+        self.email_entry.pack(pady=5)
 
         # Password label and entry field
         self.password_label = tk.Label(root, text="Password:")
-        self.password_label.pack()
+        self.password_label.pack(pady=2)
 
         self.password_entry = tk.Entry(root, show="*")  # Use asterisk for hidden password
-        self.password_entry.pack()
+        self.password_entry.pack(pady=5)
 
         # Register button
         self.register_button = tk.Button(root, text="Login", command=self.login)
-        self.register_button.pack()
+        self.register_button.pack(pady=10)
 
         # Message label (optional)
         self.message_label = tk.Label(root, text="")

@@ -3,9 +3,9 @@ file: main.py
 function: Main file to run the application
 '''
 import tkinter as tk
+import sqlite3
 from registration import RegistrationForm
 from login import LoginForm
-import sqlite3
 
 class ApplicantApp(tk.Tk):
     """
@@ -22,19 +22,19 @@ class ApplicantApp(tk.Tk):
 
         # Login button
         login_button = tk.Button(self,text="Login", command=self.handle_login_click)
-        login_button.pack()
+        login_button.pack(pady=10, side='top', anchor='center')
 
         # Registration button
         register_button = tk.Button(self,text="Register", command=self.handle_register_click)
-        register_button.pack()
+        register_button.pack(pady=10, side='top', anchor='center')
 
         # Generate Report button
         generate_button = tk.Button(self,text="Generate Report", command=self.generate_report)
-        generate_button.pack()
+        generate_button.pack(pady=10)
 
         # Message label (optional)
         self.message_label = tk.Label(self, text="")
-        self.message_label.pack()
+        self.message_label.pack(pady=10)
 
     def generate_report(self):
         '''
