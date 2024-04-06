@@ -3,7 +3,6 @@ file: main.py
 function: Main file to run the application
 '''
 import tkinter as tk
-import sqlite3
 from registration import RegistrationForm
 from login import LoginForm
 from home import HomeWindow
@@ -31,77 +30,32 @@ class ApplicantApp(tk.Tk):
         register_button.pack(pady=10, side='top', anchor='center')
 
         # Generate Report button
-        generate_button = tk.Button(self,text="Generate Report", command=self.generate_report)
+        generate_button = tk.Button(self,text="Generate Report", command=self.handle_report_click)
         generate_button.pack(pady=10)
 
         # Message label (optional)
         self.message_label = tk.Label(self, text="")
         self.message_label.pack(pady=10)
-
-    def generate_report(self):
-        '''
-        method: generate_report
-        function: Generate a report based on the data in the database
-        '''
-        if not self.success:
+        # Function to handle login button click
+    def handle_report_click(self):
+        """
+        Function: Create a login form instance within a new window
+        """
+        if self.success:
+            home_window = HomeWindow()
+            home_window.mainloop()
+        else:
             self.message_label.config(text="Please login or register first!")
-            return
-
-        # Connect to the database (if needed)
-        conn = sqlite3.connect('db.sqlite3')
-        cursor = conn.cursor()
-
-        # Fetch data for the report (replace with your specific logic)
-        cursor.execute("SELECT * FROM applicants")  # Example query
-        applicants = cursor.fetchall()
-
-        # Generate report content (text, HTML, etc.) based on fetched data
-        report_content = self.format_report_data(applicants)  # Placeholder for formatting
-
-        # Display the report (different methods based on your choice)
-        self.display_report(report_content)
-        self.message_label.config(text="Report Generated!")
-
-        # Close the connection
-        conn.close()
-
-    # Placeholder function for formatting report data (replace with your logic)
-    def format_report_data(self, applicants):
-        '''
-        method: format_report_data
-        function: Format the report data in a specific way
-        '''
-        report_text = "Applicant Report:\n"
-        for applicant in applicants:
-            report_text += f"-> Username: {applicant[1]},\n Email: {applicant[2]}\n Attendee 🚩\n\n"
-        return report_text
-
-    # Placeholder function for displaying the report (replace with your choice)
-    def display_report(self, report_content):
-        '''
-        method: display_report
-        function: Display the report in a message box or a new text widget
-        '''
-        # # Option 1: Display in a message box
-        # tk.messagebox.showinfo(title="Report", message=report_content)
-
-        # Option 2: Display in a new text widget within the main window (example)
-        report_window = tk.Toplevel(self)
-        report_window.title("Report")
-        report_text_widget = tk.Text(report_window)
-        report_text_widget.insert(tk.END, report_content)
-        report_text_widget.pack()
-
 
     # Function to handle login button click
     def handle_login_click(self):
         """
         Function: Create a login form instance within a new window
         """
-        login_window = tk.Toplevel(self)  
+        login_window = tk.Toplevel(self)
         login_window.title("Login")
         login_form = LoginForm(login_window)
-        login_window.wait_window() 
+        login_window.wait_window()
 
         # If login is successful, open home.py
         if login_form.success:

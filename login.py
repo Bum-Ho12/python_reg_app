@@ -68,10 +68,10 @@ class LoginForm:
                 self.message_label.config(text="Login successful!")
                 self.success = True
                 self.root.destroy()
-                # Store login time 
+                # Store login time
                 login_time = datetime.datetime.now()
-                cursor.execute("UPDATE applicants SET login_time = ? WHERE email = ?", 
-                              (login_time, email)) 
+                cursor.execute("UPDATE applicants SET login_time = ? WHERE email = ?",
+                    (login_time, email))
                 conn.commit()
             else:
                 self.message_label.config(text="Invalid email or password.")

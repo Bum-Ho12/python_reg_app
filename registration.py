@@ -70,7 +70,7 @@ class RegistrationForm:
                 username TEXT NOT NULL,
                 email TEXT NOT NULL UNIQUE,
                 password TEXT NOT NULL,
-                login_time TEXT 
+                login_time TEXT DEFAULT CURRENT_TIMESTAMP
             )'''
         )
 
