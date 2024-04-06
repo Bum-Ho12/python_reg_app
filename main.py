@@ -6,6 +6,7 @@ import tkinter as tk
 import sqlite3
 from registration import RegistrationForm
 from login import LoginForm
+from home import HomeWindow
 
 class ApplicantApp(tk.Tk):
     """
@@ -97,14 +98,18 @@ class ApplicantApp(tk.Tk):
         """
         Function: Create a login form instance within a new window
         """
-        login_window = tk.Toplevel(self)  # Use self for parent window
+        login_window = tk.Toplevel(self)  
         login_window.title("Login")
         login_form = LoginForm(login_window)
-        login_window.wait_window()
+        login_window.wait_window() 
+
+        # If login is successful, open home.py
         if login_form.success:
             self.success = True
             self.message_label.config(text="Login successful!")
-        return login_form
+            # self.withdraw()  # Hide the main window
+            home_window = HomeWindow()
+            home_window.mainloop()
 
     # Function to handle registration button click
     def handle_register_click(self):

@@ -3,6 +3,7 @@ file name: login.py
 function: GUI for login form
 '''
 
+import datetime
 import tkinter as tk
 import sqlite3
 
@@ -67,6 +68,11 @@ class LoginForm:
                 self.message_label.config(text="Login successful!")
                 self.success = True
                 self.root.destroy()
+                # Store login time 
+                login_time = datetime.datetime.now()
+                cursor.execute("UPDATE applicants SET login_time = ? WHERE email = ?", 
+                              (login_time, email)) 
+                conn.commit()
             else:
                 self.message_label.config(text="Invalid email or password.")
                 self.success = False
